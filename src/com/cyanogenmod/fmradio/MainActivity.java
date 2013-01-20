@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.stericsson.hardware.fm.FmBand;
 import com.stericsson.hardware.fm.FmReceiver;
+import com.stericsson.hardware.fm.FmReceiverImpl;
 
 import java.io.IOException;
 
@@ -107,7 +108,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.main);
-        mFmReceiver = (FmReceiver) getSystemService("fm_receiver");
+        mFmReceiver = new FmReceiverImpl(null);//TODO: correct for non-mock is (FmReceiver) getSystemService("fm_receiver");
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         mSelectedBand = settings.getInt("selectedBand", 1);
         mFmBand = new FmBand(mSelectedBand);
